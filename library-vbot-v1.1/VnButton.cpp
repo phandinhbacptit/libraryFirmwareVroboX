@@ -107,12 +107,12 @@ int VnButton::read_mode(void)
     val = digitalRead(mode_pin);
 #endif
 
-	// delay(150);
+	 delay(150);
 	
 	if (!val)
 		mode_state ++;
 	
-	if (mode_state > 4)
+	if (mode_state > 3)
 		mode_state = 0;
 	
 	switch (mode_state) {
@@ -127,10 +127,6 @@ int VnButton::read_mode(void)
 		case MODE3:
 			ret = 3;
 			// Serial.println("Mode3");
-			break;
-		case MODE4:
-			ret = 4;
-			// Serial.println("Mode4");
 			break;
 		default:
 			ret = 0;
