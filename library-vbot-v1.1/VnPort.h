@@ -123,8 +123,8 @@ static VnPort_Sig vnPort[17] =
 #define BUTTON              (0x0a)
 #define MAXTRIX             (0x0b) // s1: SER - s2: CLK 
 #define MPU6050             (0x0c)
-#define SOUND_SENSOR        (0x0d)
-#define PORT_14             (0x0e)
+#define SOUND       		(0x0d)
+#define COLOR               (0x0e)
 #define PORT_15             (0x0f)
 #define PORT_16             (0x10)
 

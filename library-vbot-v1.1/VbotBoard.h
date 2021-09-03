@@ -14,7 +14,7 @@
 #include "VnServo.h"
 
 #include "VnBle.h"
-//#include "VnColorSensor.h"
+#include "VnColorSensor.h"
 #include "VnIrRemote.h"
 #include "VnButton.h"
 #include "VnRGB.h"
