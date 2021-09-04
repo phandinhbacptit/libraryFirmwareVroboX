@@ -85,7 +85,7 @@ typedef struct {
 #ifdef VBOT_CHAIN
 static VnPort_Sig vnPort[17] =
 {
-  { NC, NC }, { 17, 16}, { NC, NC }, { NC, NC }, { 22,  21 },
+  { NC, NC }, { 17, 16}, { NC, NC }, { NC, NC }, { 22, 21 },
   { 38, A0 }, { 2, NC }, { NC, 23 }, { NC, 32 }, { NC, 25 },
   { NC, 39 }, { 4, 33 }, { 21, 22 }, { 35, NC }, { 4, 13 },
   { NC, NC }, { 13, 4 },
@@ -122,7 +122,7 @@ static VnPort_Sig vnPort[17] =
 #define IR_REMOTE           (0x09)
 #define BUTTON              (0x0a)
 #define MAXTRIX             (0x0b) // s1: SER - s2: CLK 
-#define MPU6050             (0x0c)
+//#define MPU6050             (0x0c)
 #define SOUND       		(0x0d)
 #define COLOR               (0x0e)
 #define PORT_15             (0x0f)
