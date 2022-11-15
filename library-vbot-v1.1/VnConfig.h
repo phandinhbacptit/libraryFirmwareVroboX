@@ -42,6 +42,9 @@
 
 #define VN_PORT_DEFINED
 
+#define OFF 		0
+#define ON 		    1
+
 #if defined(__AVR__)
 #define VnPIN_TO_BASEREG(pin)               ( portInputRegister (digitalPinToPort (pin) ) )
 #define VnPIN_TO_BITMASK(pin)               ( digitalPinToBitMask (pin) )

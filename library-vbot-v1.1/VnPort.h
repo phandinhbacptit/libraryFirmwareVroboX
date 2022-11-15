@@ -96,7 +96,7 @@ static VnPort_Sig vnPort[17] =
   { NC, NC }, { 17, 16}, { NC, NC }, { NC, NC }, { 4, 13 },
   { 38, A0 }, { 2, NC }, { NC, 23 }, { NC, 32 }, { NC, 25 },
   { NC, 39 }, { 4, 33 }, { 21, 22 }, { 22, NC }, { 4, 13 },
-  { 21, 22 }, { 13, 4 },
+  { 21, 22 }, { 13, 33 },
 }; 
 static VnMotor	vnMotor[4] = 
 {
@@ -134,7 +134,7 @@ static VnMotor	vnMotor[4] =
 #define SOUND       		(0x0d)
 #define COLOR               (0x0e)
 #define SINGLE_LED          (0x0f)
-#define PORT_16             (0x10)
+#define TRAFFIC_LED         (0x10)
 
 ////#ifdef Vbot_H
 ////#define PORT_RGB            (0x03)

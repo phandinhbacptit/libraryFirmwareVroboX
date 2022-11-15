@@ -1,12 +1,12 @@
 /**
  * @ Copyright (C), 2018-2022, VrobotX
- * \class   VnLed
+ * \class   VnLedTraffic
  * \brief   Driver for Vn Single Led module.
- * @file    VnLed.h
+ * @file    VnLedTraffic.h
  * @author  VrobotX
  * @version V1.0.0
  * @date   2018/07/20
- * @brief   Header for VnLed.cpp module
+ * @brief   Header for VnLedTraffic.cpp module
  *
  * @ Copyright
  * This software is Copyright (C), 2018-2022, VrobotX. Use is subject to license \n
@@ -26,8 +26,8 @@
  *
  * @ Vnthod List:
  *
- *    1. void VnLed::setpin(int pin);
- *	  2. void VnLed::ctrLed(boolean state)
+ *    1. void VnLedTraffic::setpin(int pin);
+ *	  2. void VnLedTraffic::ctrLed(boolean state)
  *
  * @ History:
  * <pre>
@@ -35,8 +35,8 @@
  * Phan Dinh Bac       2022/11/07      1.0.0            Build the first library.
  * </pre>
  */
-#ifndef _VnLed_H_
-#define _VnLed_H_
+#ifndef _VNLEDTRAFFIC_H_
+#define _VNLEDTRAFFIC_H_
 
 #include <stdint.h>
 #include <stdbool.h>
@@ -47,26 +47,31 @@
 #include "VnPort.h"
 #endif // VN_PORT_DEFINED
 /**
- * Class: VnLed
- * @Brief : Declaration of Class VnLed.
+ * Class: VnLedTraffic
+ * @Brief : Declaration of Class VnLedTraffic.
  */
+#define RED 			1
+#define YELLOW		    2
+#define GREEN			3
+
 #ifdef VN_PORT_DEFINED
-class VnLed : public VnPort
+class VnLedTraffic : public VnPort
 #else
-class VnLed
+class VnLedTraffic
 #endif
 {
 public:
 #ifdef VN_PORT_DEFINED
 
-  VnLed(void);
-  VnLed(uint8_t port);
+  VnLedTraffic(void);
+  VnLedTraffic(uint8_t port);
 #else // VN_PORT_DEFINED
-  VnLed(int pin);
+  VnLedTraffic(int redPin, int yellowPin, int greenPin);
 #endif // VN_PORT_DEFINED
-	void setpin(int pin);
-	void ctrLed(int state);
+	void ctrLed(int typeLed, int state);
 	
-	volatile uint8_t led_pin;
+	volatile uint8_t red_led_pin;
+	volatile uint8_t yellow_led_pin;
+	volatile uint8_t green_led_pin;
 };
 #endif
