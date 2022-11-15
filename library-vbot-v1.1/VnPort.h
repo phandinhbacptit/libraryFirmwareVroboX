@@ -83,30 +83,38 @@ typedef struct {
 
 
 #ifdef VBOT_CHAIN
-static VnPort_Sig vnPort[17] =
+/* static VnPort_Sig vnPort[17] =
 {
   { NC, NC }, { 17, 16}, { NC, NC }, { NC, NC }, { 22, 21 },
   { 38, A0 }, { 2, NC }, { NC, 23 }, { NC, 32 }, { NC, 25 },
   { NC, 39 }, { 4, 33 }, { 21, 22 }, { 35, NC }, { 4, 13 },
   { NC, NC }, { 13, 4 },
-};
+}; */
 
+static VnPort_Sig vnPort[17] =
+{
+  { NC, NC }, { 17, 16}, { NC, NC }, { NC, NC }, { 4, 13 },
+  { 38, A0 }, { 2, NC }, { NC, 23 }, { NC, 32 }, { NC, 25 },
+  { NC, 39 }, { 4, 33 }, { 21, 22 }, { 22, NC }, { 4, 13 },
+  { 21, 22 }, { 13, 4 },
+}; 
 static VnMotor	vnMotor[4] = 
 {
 //  {NC, NC, NC}, {14, 15, 4}, {14, 15, 19}, {26, 27, 18},
-    {NC, NC, NC}, {NC, NC, NC}, {14, 15, 19}, {26, 27, 18},
+    {NC, NC, NC}, {NC, NC, NC}, {12, 15, 19}, {26, 27, 18},
 };
 #endif 
 
 #ifdef VBOT_MINI
 
-static VnPort_Sig vnPort[17] =
+ static VnPort_Sig vnPort[17] =
 {
   { NC, NC }, { 16, 17 }, { 14, 15 }, { 18, 19 }, { 34, 35 },
   { 38, A0 }, { NC, NC }, { NC, 23 }, { NC, 32 }, { NC, 25 },
   { NC, 39 }, { 12, 2  }, { 21, 22 }, { NC, NC }, { NC, NC },
   { NC, NC }, { NC, NC },
-};
+}; 
+
 
 #endif
 
@@ -116,7 +124,7 @@ static VnPort_Sig vnPort[17] =
 #define M3                  (0x03)
 #define FLOWLINE            (0x04)
 #define LIGHT_SENSOR        (0x05)
-#define SERVO               (0x06)
+#define SERVO_PORT          (0x06)
 #define RGB_LED             (0x07)
 #define BUZZER              (0x08)
 #define IR_REMOTE           (0x09)
@@ -125,7 +133,7 @@ static VnPort_Sig vnPort[17] =
 //#define MPU6050             (0x0c)
 #define SOUND       		(0x0d)
 #define COLOR               (0x0e)
-#define PORT_15             (0x0f)
+#define SINGLE_LED          (0x0f)
 #define PORT_16             (0x10)
 
 ////#ifdef Vbot_H

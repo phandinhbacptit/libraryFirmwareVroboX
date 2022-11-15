@@ -103,7 +103,8 @@ void VnServo::write(int value)
 	
 }
 #define MIN_PERIOD		1736 //(0.53ms <=> 0 degree)
-#define MAX_PERIOD 		7897 //(2.41ms <-> 180 degree)
+// #define MAX_PERIOD 		14058 //(4.82ms <-> 360 degree)
+ #define MAX_PERIOD 	7897 //(2.41ms <-> 180 degree)
 #define FULL_RANGLE		180 // degree
 void VnServo::rotate(int degree)
 {
@@ -113,5 +114,4 @@ void VnServo::rotate(int degree)
 	write (val);
 	Serial.println(val);
 }
-
 

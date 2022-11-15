@@ -53,7 +53,6 @@ VnBuzzer::VnBuzzer(void)
 {
   buzzer_pin = 32;
   Serial.println(buzzer_pin);
- 
 }
 
 /**

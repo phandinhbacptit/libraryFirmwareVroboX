@@ -1,3 +1,4 @@
+
 /**
  * @ Copyright (C), 2018-2020, Vrobotx
  * \class   VnColorSensor
@@ -147,7 +148,7 @@ void VnColorSensor::read_color(int *red, int *green, int *blue)
 	// Serial.println(" ");
 	// Serial.print("R = ");
 	// Serial.print(redFrequency);
-	delay(10);
+	 delay(2);
 	
 	//Setting GREEN (G) filtered photodiodes to be read
 	digitalWrite(_s2Pin, HIGH);
@@ -158,7 +159,7 @@ void VnColorSensor::read_color(int *red, int *green, int *blue)
 	// Serial.print(" ");
 	// Serial.print("G = ");
     // Serial.print(greenFrequency);
-	delay(10);
+	 delay(2);
 	
 	// Setting BLUE (B) filtered photodiodes to be read
 	digitalWrite(_s2Pin, LOW);
@@ -169,7 +170,7 @@ void VnColorSensor::read_color(int *red, int *green, int *blue)
 	// Serial.print(" ");
 	// Serial.print("B = ");
 	// Serial.print(blueFrequency);
-	delay(10);
+	 delay(2);
 }
 
 /**
