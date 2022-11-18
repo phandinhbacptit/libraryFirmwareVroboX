@@ -91,12 +91,12 @@ typedef struct {
   { NC, NC }, { 13, 4 },
 }; */
 
-static VnPort_Sig vnPort[18] =
+static VnPort_Sig vnPort[19] =
 {
   { NC, NC }, { 17, 16}, { NC, NC }, { NC, NC }, { 4, 13 },
   { 38, A0 }, { 2, NC }, { NC, 23 }, { NC, 32 }, { NC, 25 },
   { NC, 39 }, { 4, 33 }, { 21, 22 }, { 22, NC }, { 4, 13 },
-  { 21, 22 }, { 13, 33 }, {21, 22},
+  { 21, 22 }, { 13, 33 }, {21, 22},{4, 13},
 }; 
 static VnMotor	vnMotor[4] = 
 {
@@ -136,6 +136,7 @@ static VnMotor	vnMotor[4] =
 #define SINGLE_LED          (0x0f)
 #define TRAFFIC_LED         (0x10)
 #define RELAY				(0x11)
+#define KEYBOARD			(0x12)
 
 ////#ifdef Vbot_H
 ////#define PORT_RGB            (0x03)
