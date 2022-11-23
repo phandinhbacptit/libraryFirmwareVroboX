@@ -45,6 +45,11 @@
 #define OFF 		0
 #define ON 		    1
 
+#define LED7SEG1		1
+#define LED7SEG2		2
+#define LED7SEG3		3
+#define LED7SEG4		4
+
 #if defined(__AVR__)
 #define VnPIN_TO_BASEREG(pin)               ( portInputRegister (digitalPinToPort (pin) ) )
 #define VnPIN_TO_BITMASK(pin)               ( digitalPinToBitMask (pin) )
