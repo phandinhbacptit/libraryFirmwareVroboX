@@ -78,16 +78,24 @@ public:
   VnUltrasonicSensor(void);
   VnUltrasonicSensor(uint8_t port);
 #else // VN_PORT_DEFINED
-
+#ifdef SRF05_V2
+  VnUltrasonicSensor(uint8_t trigerPin, uint8_t signalPin, uint8_t echoPin);
+#else 
   VnUltrasonicSensor(uint8_t trigerPin, uint8_t echoPin);
+#endif
 #endif // VN_PORT_DEFINED
-
+#ifdef SRF05_V2
+  void makePulse(int numPulse);
+  long distanceCm(uint16_t TIME_OUT);
+#else 
   void setpin(uint8_t SignalPin);
   double distanceCm(uint16_t = 400);
   long measure(unsigned long = 30000);
+#endif
 private:
   volatile uint8_t  _SignalPin;
   volatile uint8_t  _EchoPin;
+  volatile uint8_t _trigerPin;
   volatile bool _measureFlag;
   volatile long _lastEnterTime;
   volatile float _measureValue;

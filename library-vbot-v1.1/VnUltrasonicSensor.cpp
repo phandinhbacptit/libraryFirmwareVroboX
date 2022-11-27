@@ -47,6 +47,33 @@
  * no pins are used or initialized here.
  * @param :  None
  */
+#ifdef SRF05_V2 
+VnUltrasonicSensor::VnUltrasonicSensor(void) : VnPort(0)
+{
+
+}
+
+/**
+ * Alternate Constructor which can call your own function to map the ultrasonic Sensor to arduino port
+ * @param :  port - RJ25 port from PORT_1 to M2
+ */
+VnUltrasonicSensor::VnUltrasonicSensor(uint8_t port) : VnPort(port)
+{
+	_trigerPin = 3;
+	_SignalPin = s2;
+	_EchoPin = s1;
+	pinMode(_trigerPin, OUTPUT);
+	pinMode(_SignalPin, OUTPUT);
+	pinMode(_EchoPin, INPUT);
+
+	digitalWrite(_trigerPin, HIGH);
+	digitalWrite(_SignalPin, HIGH);
+	
+	Serial.println("\n hhhh");
+	Serial.println(_SignalPin);
+	Serial.println(_EchoPin);
+}
+#else
 VnUltrasonicSensor::VnUltrasonicSensor(void) : VnPort(0)
 {
 
@@ -60,12 +87,27 @@ VnUltrasonicSensor::VnUltrasonicSensor(uint8_t port) : VnPort(port)
 {
 
 }
+#endif
 #else // VN_PORT_DEFINED
 /**
  * Alternate Constructor which can call your own function to map the ultrasonic Sensor to arduino port,
  * it will assigned the signal pin.
  * @param :  port - arduino port(should analog pin)
  */
+#ifdef SRF05_V2
+VnUltrasonicSensor::VnUltrasonicSensor(uint8_t trigerPin, uint8_t signalPin, uint8_t echoPin)
+{
+  _trigerPin = trigerPin;
+  _SignalPin = signalPin;
+  _EchoPin = echoPin;
+  pinMode(_trigerPin, OUTPUT);
+  pinMode(_SignalPin, OUTPUT);
+  pinMode(_EchoPin, INPUT);
+  _lastEnterTime = millis();
+  _measureFlag = true;
+  _measureValue = 0;
+}
+#else 
 VnUltrasonicSensor::VnUltrasonicSensor(uint8_t trigerPin, uint8_t echoPin)
 {
   _SignalPin = trigerPin;
@@ -76,7 +118,55 @@ VnUltrasonicSensor::VnUltrasonicSensor(uint8_t trigerPin, uint8_t echoPin)
   _measureFlag = true;
   _measureValue = 0;
 }
+#endif
 #endif // VN_PORT_DEFINED
+
+#ifdef SRF05_V2
+
+void VnUltrasonicSensor::makePulse(int numPulse) 
+{
+	digitalWrite(_trigerPin, LOW);
+	delayMicroseconds(100);
+	int i;
+	for (i = 1; i <= numPulse; i = i + 1) {
+		digitalWrite(_SignalPin, LOW);     
+		delayMicroseconds(12);
+		digitalWrite(_SignalPin, HIGH);
+		delayMicroseconds(11);
+	}
+	delayMicroseconds(100);
+	digitalWrite(_trigerPin, HIGH);
+}
+
+/**
+ * @brief :  Centimeters return the distance
+ * @param :  MAXcm - The Max centimeters can be measured, the default value is 400.
+ * @retval : The distance measurement in centimeters
+ * @Others : None
+ */
+long VnUltrasonicSensor::distanceCm(uint16_t TIME_OUT)
+{
+  int t = 0;
+  int t1 = 0;
+  long tempDist = 0;
+  
+  makePulse(7);
+	
+  while (t1 < TIME_OUT){
+    t = t + 2;
+    t1 = t1 + 2;
+    delayMicroseconds(1);
+    if (digitalRead(_EchoPin) == HIGH){
+		t1 = TIME_OUT;
+    }
+  }
+  
+  tempDist = (long)t * 0.0344 / 2;
+  
+  return tempDist;
+}
+
+#else
 
 /**
  * @brief :  Reset the ultrasonic Sensor available PIN by its arduino port.
@@ -84,6 +174,7 @@ VnUltrasonicSensor::VnUltrasonicSensor(uint8_t trigerPin, uint8_t echoPin)
  * @retval : None
  * @Others : None
  */
+ 
 void VnUltrasonicSensor::setpin(uint8_t SignalPin)
 {
   _SignalPin = SignalPin;
@@ -156,3 +247,4 @@ long VnUltrasonicSensor::measure(unsigned long timeout)
   return(duration);
 }
 
+#endif
