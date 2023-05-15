@@ -89,15 +89,18 @@ VnLedTraffic::VnLedTraffic(int redPin, int yellowPin, int greenPin)
 void VnLedTraffic::ctrLed(int typeLed, int state)
 {
 	switch (typeLed) {
-		case RED:
+		case RED:	
+			Serial.print("RED");
 			pinMode(red_led_pin, OUTPUT);
 			digitalWrite(red_led_pin, state);
 		break;
 		case YELLOW:
+			Serial.print("YELLOW");
 			pinMode(yellow_led_pin, OUTPUT);
 			digitalWrite(yellow_led_pin, state);
 		break;
 		case GREEN:
+			Serial.print("GREEN");
 			pinMode(green_led_pin, OUTPUT);
 			digitalWrite(green_led_pin, state);
 		break;

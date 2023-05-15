@@ -134,52 +134,56 @@ void VnLed7Seg::screenClear(void)
 	digitalWrite(_latchPin, HIGH);
 	delay(1);
 }
-void VnLed7Seg::setLed(int pos, int number)
+void VnLed7Seg::setLed(uint8_t num1, uint8_t num2, uint8_t num3, uint8_t num4, int duration)
 {
-     digitalWrite(_latchPin, LOW);
-      switch (pos) {
-        case 1:
-          shiftOut(_serPin, _clkPin, LSBFIRST, 0x80);
-          break;
-        case 2:
-          shiftOut(_serPin, _clkPin, LSBFIRST, 0x40);
-          break;
-        case 3:
-          shiftOut(_serPin, _clkPin, LSBFIRST, 0x20);
-          break;
-        case 4:
-          shiftOut(_serPin, _clkPin, LSBFIRST, 0x10);
-          break;
-      }
-	  switch (number) {
-		  case 'a':
-		  case 'A':
-		   shiftOut(_serPin, _clkPin, LSBFIRST,  LED_BCD[10]);
-		   break;
-		  case 'b':
-		  case 'B':
-		   shiftOut(_serPin, _clkPin, LSBFIRST,  LED_BCD[11]);
-		   break;
-		  case 'c':
-		  case 'C':
-		   shiftOut(_serPin, _clkPin, LSBFIRST,  LED_BCD[12]);
-		   break;
-		  case 'd':
-		  case 'D':
-		   shiftOut(_serPin, _clkPin, LSBFIRST,  LED_BCD[13]);
-		   break;
-		  case 'e':
-		  case 'E':
-		   shiftOut(_serPin, _clkPin, LSBFIRST,  LED_BCD[14]);
-		   break;
-		  case 'f':
-		  case 'F':
-		   shiftOut(_serPin, _clkPin, LSBFIRST,  LED_BCD[15]);
-		   break;
-		  default:
-			shiftOut(_serPin, _clkPin, LSBFIRST,  LED_BCD[number]);
-			break;
+	int pos[4] = {0x80, 0x40, 0x20, 0x10};
+	uint8_t tmpNum[] = {0, 0, 0, 0};
+	tmpNum[0] = num1;
+	tmpNum[1] = num2;
+	tmpNum[2] = num3;
+	tmpNum[3] = num4;
+	uint32_t _tmpDur = duration * 200;
+	
+	for (int i = 0; i <=3; i++) {
+		switch (tmpNum[i]) {
+			case 'a':
+			case 'A':
+				tmpNum[i] = LED_BCD[10];
+				break;
+			case 'b':
+			case 'B':
+				tmpNum[i] = LED_BCD[11];
+				break;
+			case 'c':
+			case 'C':
+				tmpNum[i] = LED_BCD[12];
+				break;
+			case 'd':
+			case 'D':
+				tmpNum[i] = LED_BCD[13];
+				break;
+			case 'e':
+			case 'E':
+				tmpNum[i] = LED_BCD[14];
+				break;
+			case 'f':
+			case 'F':
+				tmpNum[i] = LED_BCD[15];
+				break;
+			default:
+				tmpNum[i] = LED_BCD[tmpNum[i]];
+				break;
 	  }
-      delay(1);
-      digitalWrite(_latchPin, HIGH);
+	}
+	  
+		for (uint32_t hold = 0; hold < _tmpDur; hold++) {
+		for (int a = 0; a < 4; a++) {
+			digitalWrite(_latchPin, LOW);
+			//delay(1);
+			shiftOut(_serPin, _clkPin, LSBFIRST, pos[a]);	//column
+			shiftOut(_serPin, _clkPin, LSBFIRST, tmpNum[a]);//row[a]);		//row
+			delay(1);
+			digitalWrite(_latchPin, HIGH);
+		}
+	}
 }

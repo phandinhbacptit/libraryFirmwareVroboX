@@ -41,6 +41,8 @@
  */
 #include "VnUltrasonicSensor.h"
 
+int  t1 = 0, t2 = 0;
+
 #ifdef VN_PORT_DEFINED
 /**
  * Alternate Constructor which can call your own function to map the ultrasonic sensor to arduino port,
@@ -69,7 +71,7 @@ VnUltrasonicSensor::VnUltrasonicSensor(uint8_t port) : VnPort(port)
 	digitalWrite(_trigerPin, HIGH);
 	digitalWrite(_SignalPin, HIGH);
 	
-	Serial.println("\n hhhh");
+	Serial.println(_trigerPin);
 	Serial.println(_SignalPin);
 	Serial.println(_EchoPin);
 }
@@ -125,8 +127,6 @@ VnUltrasonicSensor::VnUltrasonicSensor(uint8_t trigerPin, uint8_t echoPin)
 
 void VnUltrasonicSensor::makePulse(int numPulse) 
 {
-	digitalWrite(_trigerPin, LOW);
-	delayMicroseconds(100);
 	int i;
 	for (i = 1; i <= numPulse; i = i + 1) {
 		digitalWrite(_SignalPin, LOW);     
@@ -134,8 +134,7 @@ void VnUltrasonicSensor::makePulse(int numPulse)
 		digitalWrite(_SignalPin, HIGH);
 		delayMicroseconds(11);
 	}
-	delayMicroseconds(100);
-	digitalWrite(_trigerPin, HIGH);
+	t1 = micros();
 }
 
 /**
@@ -144,24 +143,27 @@ void VnUltrasonicSensor::makePulse(int numPulse)
  * @retval : The distance measurement in centimeters
  * @Others : None
  */
-long VnUltrasonicSensor::distanceCm(uint16_t TIME_OUT)
+long VnUltrasonicSensor::distanceCm1(uint16_t TIME_OUT)
 {
-  int t = 0;
-  int t1 = 0;
+  int gettime = 23255;
+  int tcnt = 0;
   long tempDist = 0;
   
-  makePulse(7);
+   makePulse(7);
 	
-  while (t1 < TIME_OUT){
-    t = t + 2;
-    t1 = t1 + 2;
+  while (tcnt < TIME_OUT){
+    tcnt = tcnt + 2;
     delayMicroseconds(1);
     if (digitalRead(_EchoPin) == HIGH){
-		t1 = TIME_OUT;
+		t2 = micros();
+		gettime = t2 - t1;
+		t2 = 0;
+		t1 = 0;
+		break;
     }
   }
   
-  tempDist = (long)t * 0.0344 / 2;
+  tempDist = (long)gettime * 0.0344 / 2;
   
   return tempDist;
 }

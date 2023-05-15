@@ -94,7 +94,6 @@ void VnLed::setpin(int pin)
  */
 void VnLed::ctrLed(int state)
 {
-	Serial.print("aa");
 	pinMode(led_pin, OUTPUT);
     digitalWrite(led_pin, state);
 }

@@ -93,11 +93,20 @@ void VnSoundSensor::setpin(uint8_t out_pin)
  */
 bool VnSoundSensor::readSoundSignal(void)
 {
+	int tcnt = 0;
+	while (tcnt < 10000) {
+		tcnt++;
+		delayMicroseconds(1);
 #ifdef VN_PORT_DEFINED
-	return(VnPort::dRead1(INPUT) );
+		if (VnPort::dRead1(INPUT) == HIGH) {
 #else // VN_PORT_DEFINED
-  return digitalRead(_soundOut);
+		if (digitalRead(_soundOut) == HIGH) {
 #endif // VN_PORT_DEFINED
+			return 1;
+			break;
+		}
+	}
+	return 0;
 }
 
 // Test merge library

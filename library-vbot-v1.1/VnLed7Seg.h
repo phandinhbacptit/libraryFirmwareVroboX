@@ -74,7 +74,7 @@ public:
 #endif //VN_PORT_DEFINED
 	void shiftOutData(uint8_t dataOut);
 	void screenClear(void);
-	void setLed(int pos, int number);
+	void setLed(uint8_t num1, uint8_t num2, uint8_t num3, uint8_t num4, int duration);
 private:
 	volatile uint8_t  _latchPin;
 	volatile uint8_t  _clkPin;

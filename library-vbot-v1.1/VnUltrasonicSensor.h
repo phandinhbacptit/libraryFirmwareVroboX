@@ -86,7 +86,7 @@ public:
 #endif // VN_PORT_DEFINED
 #ifdef SRF05_V2
   void makePulse(int numPulse);
-  long distanceCm(uint16_t TIME_OUT);
+  long distanceCm1(uint16_t TIME_OUT);
 #else 
   void setpin(uint8_t SignalPin);
   double distanceCm(uint16_t = 400);
