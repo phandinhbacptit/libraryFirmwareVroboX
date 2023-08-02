@@ -146,6 +146,36 @@ void VnLed7Seg::setLed(uint8_t num1, uint8_t num2, uint8_t num3, uint8_t num4, i
 	
 	for (int i = 0; i <=3; i++) {
 		switch (tmpNum[i]) {
+			case 0:
+				tmpNum[i] = LED_BCD[0];
+				break;
+			case 1:
+				tmpNum[i] = LED_BCD[1];
+				break;
+			case 2:
+				tmpNum[i] = LED_BCD[2];
+				break;
+			case 3:
+				tmpNum[i] = LED_BCD[3];
+				break;
+			case 4:
+				tmpNum[i] = LED_BCD[4];
+				break;
+			case 5:
+				tmpNum[i] = LED_BCD[5];
+				break;
+			case 6:
+				tmpNum[i] = LED_BCD[6];
+				break;
+			case 7:
+				tmpNum[i] = LED_BCD[7];
+				break;
+			case 8:
+				tmpNum[i] = LED_BCD[8];
+				break;
+			case 9:
+				tmpNum[i] = LED_BCD[9];
+				break;
 			case 'a':
 			case 'A':
 				tmpNum[i] = LED_BCD[10];
@@ -171,7 +201,10 @@ void VnLed7Seg::setLed(uint8_t num1, uint8_t num2, uint8_t num3, uint8_t num4, i
 				tmpNum[i] = LED_BCD[15];
 				break;
 			default:
-				tmpNum[i] = LED_BCD[tmpNum[i]];
+				tmpNum[0] = num1;
+				tmpNum[1] = num2;
+				tmpNum[2] = num3;
+				tmpNum[3] = num4;
 				break;
 	  }
 	}

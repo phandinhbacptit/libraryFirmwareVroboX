@@ -107,8 +107,8 @@ static VnPort_Sig vnPort[21] =
 }; 
 static VnMotor	vnMotor[4] = 
 {
-  {NC, NC, NC}, {14, 15, 4}, {14, 15, 19}, {26, 27, 18},
-//    {NC, NC, NC}, {NC, NC, NC}, {12, 15, 19}, {26, 27, 18},
+ // {NC, NC, NC}, {14, 15, 4}, {14, 15, 19}, {26, 27, 18},
+    {NC, NC, NC}, {NC, NC, NC}, {12, 15, 19}, {26, 27, 18},
 };
 #endif 
 
